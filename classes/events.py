@@ -31,5 +31,3 @@ class Events:
                 else:
                     return False
         return True
-
-

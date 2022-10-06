@@ -12,10 +12,13 @@ timer = pygame.time.Clock()
 
 default_width = 1080/2
 default_height = 1920/2
+default_player_x = default_width/2
+default_player_y = default_height/2
 default_speed = 5
 default_gravity = .4
 default_jump_height = 10
 default_platforms_speed = 2.3
+
 
 def main():
     jump = False
@@ -23,8 +26,9 @@ def main():
     y_change = 0
     points = 0
 
+    # initial objects
     screen = Screen(default_width, default_height)
-    player = Player(177, 280, default_speed, default_gravity, default_jump_height, screen)
+    player = Player(default_player_x, default_player_y, default_speed, default_gravity, default_jump_height, screen)
     world = World(screen)
 
     Sound.main_theme()
@@ -50,7 +54,7 @@ def main():
             if world.platforms_speed < default_platforms_speed*2: world.platforms_speed *= 1.03
             if world.disperse[0] > 450:  world.disperse = [int(dis*.99) for dis in world.disperse]
             if player.gravity < default_gravity*2: player.gravity *= 1.01
-            if player.jump_height < default_jump_height*2: player.jump_height *= 1.01
+            if player.jump_height < default_jump_height*1.5: player.jump_height *= 1.01
             if player.speed < default_speed*1.5: player.speed += 0.1
 
         screen.draw_points(int(points/10))
@@ -60,7 +64,9 @@ def main():
 
     while Events.check_continue_status():
         screen.py_screen.blit(screen.bg_img, (0, 0))
-        screen.draw_defeat(int(points/10))
+        screen.draw_defeat_message()
+        screen.draw_after_death_score(int(points / 10))
+        screen.draw_continue_message()
         pygame.display.flip()
 
 

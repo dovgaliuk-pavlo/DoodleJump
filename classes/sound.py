@@ -25,7 +25,7 @@ class Sound:
     def main_theme(cls):
         main_theme_filename = "main_theme.mp3"
         cls.load_music(main_theme_filename)
-        cls.set_volume(0.7)
+        cls.set_volume(0.6)
         cls.play(-1)
 
     @classmethod

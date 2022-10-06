@@ -22,15 +22,22 @@ class Screen:
         text = str(points)
         self.draw_text(font_size, position_func, text, Screen.black)
 
-    def draw_defeat(self, points):
+    def draw_defeat_message(self):
+        font_size = 70
+        def position_func(pos): pos.center = (self.width/2, self.height/2-font_size); return pos
+        text = "Defeat"
+        self.draw_text(font_size, position_func, text, Screen.black)
+
+    def draw_after_death_score(self, points):
         font_size = 40
         def position_func(pos): pos.center = (self.width/2, self.height/2); return pos
         text = "Score:" + " " + str(points)
         self.draw_text(font_size, position_func, text, Screen.black)
 
-        font_size = 70
-        def position_func(pos): pos.center = (self.width/2, self.height/2-font_size); return pos
-        text = "Defeat"
+    def draw_continue_message(self):
+        font_size = 40
+        def position_func(pos): pos.center = (self.width/2, self.height - font_size*3); return pos
+        text = "Tap to continue"
         self.draw_text(font_size, position_func, text, Screen.black)
 
     def draw_text(self, font_size, position_func, text, color):
@@ -38,5 +45,3 @@ class Screen:
         text = font.render(text, True, color)
         text_rect = position_func(text.get_rect())
         self.py_screen.blit(text, text_rect)
-
-
